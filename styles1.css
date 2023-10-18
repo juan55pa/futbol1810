@@ -1,0 +1,119 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    border:0px;
+    background-image: url(campo1.jpg);
+    background-size: cover; 
+    
+     
+    
+}
+.container{
+    display:grid;
+    grid-template-columns: 1f 1fr 1fr 1fr;
+    background-color: aquamarine;
+    font-size: 30px;
+    width: 100%;
+    height: auto;   
+    background-image: url(campo1.jpg);
+    background-size: cover;
+      
+    
+      
+   
+    
+}
+.container-player {
+    display: flex;    
+    flex-direction: column;
+    justify-content: space-between;
+    color: rgb(248, 243, 242);    
+    background-image: url(campo1.jpg);
+    background-size: cover;
+          
+    
+     
+}
+    
+
+.teams{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: black;    
+    margin: 0px;
+    border:10px;
+    border-radius: 5px;
+    
+    
+    
+    
+    
+}
+.team{
+    margin: 10px;
+    border:10px;
+    border-radius: 5px;    
+    background-color:white;
+    text-align: right;
+    
+    
+     
+    
+}
+img{
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+   
+    
+    
+
+}
+.players{
+    background-color: rgb(189, 14, 14);
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-image: url(campo1.jpg);
+    background-size: cover;
+    padding: 30px;
+      
+    
+   
+    
+}
+.item{
+    margin: 10px;
+    border:10px;
+    border-radius: 5px;
+   
+    background-color:rgb(12, 1, 1);
+    color: rgb(222, 240, 18);
+    
+    
+    
+
+}
+.nav{
+    margin: 10px 20px 0px 20px;
+    padding: 0px 10px 0px 10px;   
+    border-radius: 50%;   
+    color: aliceblue;
+    align-content: flex-end;
+    text-decoration:none;
+    
+    
+
+}
+a{
+    text-decoration: none;
+    background-color: black;
+    color: green;
+    border-radius: 20%;
+    align-items: flex-end;
+    
+}
+    
+
+
+    

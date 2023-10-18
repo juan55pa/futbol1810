@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="equipos.js">
+</head>
+<body>
+    <nav>
+    <div class="container">
+        <div class="teams">
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+        </nav>    
+        </div>
+        <div class="container-player">
+            <div class="players"></div>
+        </div>
+    </div>
+    <script>
+        let team=document.querySelectorAll(".team");
+        let player=document.querySelector(".players");
+        let teamId=[995,997,1006,991,945,927,570,990,988,568,989,1002,994,1004,999,943,1001,1007,996,563,554,992,574,1005,1003,549,1000,998];
+
+        let key="5e8bdecc7ae2fc73ffaeb2f4a11ea1107e7d1371d38663f26f71a0b58e73d921";
+                
+
+        function players(teamId,getPlayers){
+        fetch(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${teamId}&APIkey=${key}`)
+                   
+            .then((response)=> response.json())
+            .then((equipo)=>{
+                //debugger;
+                getPlayers(equipo.result[0].team_name,equipo.result[0].players);
+
+            });   
+        }
+
+        for (let i= 0; i < teamId.length;i++){
+        players(teamId[i],(team_name,players)=>{
+            team[i].innerHTML =team_name;
+            team[i].addEventListener("click",()=>{
+                player.innerHTML="<h3>Jugadores</h3>";
+                for (const item of players){
+                    let p =document.createElement("p");
+                    texto=document.createTextNode(item.player_name);
+                    p.appendChild(texto);
+                    player.appendChild(p);
+                    }
+                });
+
+            });
+        }
+      
+    </script>
+    
+</body>
+</html>

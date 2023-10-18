@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="equipos.js">
+</head>
+<body>
+    
+    <div class="container">
+        
+        <div class="teams">
+            <div class="nav"><a href="primeradivision.html">PRIMERA DIVISION</a></div>
+            <div class="nav"><a href="primerab.html">PRIMERA B</a></div>
+            <div class="nav"><a href="primerac.html">PRIMERA C</a></div>
+            <div class="nav"><a href="primerad.html">PRIMERA D</a></div>
+            <div class="nav"><a href="federala.html">FEDERAL A</a></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            <div class="team"></div>
+            
+            
+            
+        </div>
+        <div class="container-player">
+            <div class="players">
+            <img src="" alt="">    
+            </div>
+            
+        </div>
+    </div>
+    <script>
+        let team=document.querySelectorAll(".team");
+        let player=document.querySelector(".players");
+        let teamId=[937,930,933,932,929,951,940,942,925,884,935,913,950,1008,936,953,955,944,916,947,938,895,931,941,926,939,954,952,949,897,886,934,928,993,956,946];
+
+        let key="5e8bdecc7ae2fc73ffaeb2f4a11ea1107e7d1371d38663f26f71a0b58e73d921";
+                
+
+        function players(teamId,getPlayers){
+        fetch(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${teamId}&APIkey=${key}`)
+                   
+            .then((response)=> response.json())
+            .then((equipo)=>{
+                //debugger;
+                getPlayers(equipo.result[0].team_name,equipo.result[0].players);
+
+            });   
+        }
+
+        for (let i= 0; i < teamId.length;i++){
+        players(teamId[i],(team_name,players)=>{
+            team[i].innerHTML =team_name;
+            team[i].addEventListener("click",()=>{
+                player.innerHTML="";
+                for (let i = 0; i < players.length; i++) {
+                let p = document.createElement("p");
+                let player_number = document.createTextNode(i + 1 + " - ");
+                let player_name = document.createTextNode(players[i].player_name + " (");
+                let player_age = document.createTextNode(players[i].player_age + " años)");
+                p.appendChild(player_number);
+                p.appendChild(player_name);
+                p.appendChild(player_age);
+                player.appendChild(p);
+                }
+                
+                });
+
+            });
+        }
+      
+    </script>
+    
+</body>
+</html>
