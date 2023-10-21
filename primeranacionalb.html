@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles1.css">
-    <link rel="stylesheet" href="equipos.js">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="hoverheader.css">
+    <link rel="icon" type="image/jpg"
+        href="https://static.vecteezy.com/system/resources/previews/009/784/979/non_2x/soccer-ball-icon-isolated-on-white-background-free-vector.jpg" />
+    <!-- Importar fuente roboto de google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <!-- -------------------------------------- -->
+    <title>Somos deporte</title>
+     <!-- -------------------------------------- -->
+     <title>Somos deporte</title>
+    </head>
+    <header>
+        <h1>
+            <!-- <img src="https://img.freepik.com/psd-premium/balon-futbol-aislado-render-3d_286925-255.jpg"> -->
+            <img
+                src="https://w7.pngwing.com/pngs/260/649/png-transparent-fc-barcelona-football-drawing-futsal-pelota-futbol-game-monochrome-sports-equipment.png">
+            <b>Somos deporte</b>
+    
+        </h1>
+        <!-- ---------------------------------------------------- -->
+        <nav>
+            <a href="primeradivision.html">PRIMERA DIVISION</a>
+            <a href="primeranacionalb.html">PRIMERA NACIONAL B</a>
+            <a href="primerab.html">PRIMERA B</a>
+            <a href="primerac.html">PRIMERA C</a>
+            <a href="primerad.html">PRIMERA D</a>
+            <a href="federala.html">TORNEO FEDERAL A</a>            
+            <div class="animation start-home"></div>
+        </nav>
+        <!-- ---------------------------------------------------- -->    
+    
+    
 </head>
 <body>
     
     <div class="container">
         
         <div class="teams">
-            <div class="nav"><a href="primeradivision.html">PRIMERA DIVISION</a></div>
-            <div class="nav"><a href="primerab.html">PRIMERA B</a></div>
-            <div class="nav"><a href="primerac.html">PRIMERA C</a></div>
-            <div class="nav"><a href="primerad.html">PRIMERA D</a></div>
-            <div class="nav"><a href="federala.html">FEDERAL A</a></div>
+            
             <div class="team"></div>
             <div class="team"></div>
             <div class="team"></div>
@@ -75,27 +103,52 @@
             });   
         }
 
-        for (let i= 0; i < teamId.length;i++){
-        players(teamId[i],(team_name,players)=>{
-            team[i].innerHTML =team_name;
-            team[i].addEventListener("click",()=>{
-                player.innerHTML="";
-                for (let i = 0; i < players.length; i++) {
+        for (let i = 0; i < teamId.length; i++) {
+        players(teamId[i], (team_name, players) => {
+        team[i].innerHTML = team_name;
+        team[i].addEventListener("click", () => {
+            player.innerHTML = "";
+            for (let i = 0; i < players.length; i++) {
+                let player_image = document.createElement("img");                
+                player_image.src = players[i].player_image;
+               
                 let p = document.createElement("p");
-                let player_number = document.createTextNode(i + 1 + " - ");
+                let player_number = document.createTextNode(players[i].player_number + " - ");
                 let player_name = document.createTextNode(players[i].player_name + " (");
                 let player_age = document.createTextNode(players[i].player_age + " años)");
+
+                // Create a new paragraph for the player type
+                let player_type = document.createElement("p");
+                player_type.textContent = players[i].player_type;
+
+                // Create a new paragraph for matches played
+                let player_match_played = document.createElement("p");
+                player_match_played.textContent = "Partidos jugados: " + players[i].player_match_played;
+
+                // Create a new paragraph for goals
+                let player_goals = document.createElement("p");
+                player_goals.textContent = "Goles convertidos: " + players[i].player_goals;
+
+                // Append the text nodes and new paragraphs to the original paragraph (p)
+                p.appendChild(player_image)
                 p.appendChild(player_number);
                 p.appendChild(player_name);
                 p.appendChild(player_age);
-                player.appendChild(p);
-                }
-                
-                });
+                p.appendChild(player_type);
+                p.appendChild(player_match_played);
+                p.appendChild(player_goals);
 
-            });
-        }
-      
+                // Append the complete paragraph to the player container
+                player.appendChild(p);
+            }
+                
+            
+        });
+    });
+}
+
+                
+         
     </script>
     
 </body>
