@@ -76,7 +76,7 @@
             
         </div>
         <div class="players">
-            <!-- Player details will be displayed here -->
+            <!-- aca van a cargarse los jugadores -->
         </div>
         <div class="container-player">
             <div class="players">
@@ -90,61 +90,61 @@
         let team=document.querySelectorAll(".team");
         let player=document.querySelector(".players");
         let teamId=[995,997,1006,991,945,927,570,990,988,568,989,1002,994,1004,999,943,1001,1007,996,563,554,992,574,1005,1003,549,1000,998];
+        
 
         let key="5e8bdecc7ae2fc73ffaeb2f4a11ea1107e7d1371d38663f26f71a0b58e73d921";
-                
+        
 
         function players(teamId,getPlayers){
         fetch(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${teamId}&APIkey=${key}`)
                    
             .then((response)=> response.json())
-            .then((equipo)=>{
-                //debugger;
+            .then((equipo)=>{                
                 getPlayers(equipo.result[0].team_name,equipo.result[0].players);
+                getTeamLogo(equipo.result[0].team_name,equipo.result[0].teamLogo)
 
             });   
         }
 
         for (let i = 0; i < teamId.length; i++) {
-        players(teamId[i], (team_name, players) => {
-        team[i].innerHTML = team_name;
-        team[i].addEventListener("click", () => {
+            players(teamId[i], (team_name, players) => {
+            team[i].innerHTML = team_name;
+            team[i].addEventListener("click", () => {
             player.innerHTML = "";
-            for (let i = 0; i < players.length; i++) {
-                let player_image = document.createElement("img");                
-                player_image.src = players[i].player_image;
-
+            for (let i = 0; i < players.length; i++) {             
                 
                
-                let p = document.createElement("p");
-                let player_number = document.createTextNode(players[i].player_number + " - ");
-                let player_name = document.createTextNode(players[i].player_name + " (");
-                let player_age = document.createTextNode(players[i].player_age + " años)");
+            let p = document.createElement("p");
+            let player_number = document.createTextNode(players[i].player_number + " - ");
+            let player_name = document.createTextNode(players[i].player_name + " (") ;
+            let player_age = document.createTextNode(players[i].player_age + " años)");
 
-                // Create a new paragraph for the player type
-                let player_type = document.createElement("p");
-                player_type.textContent = players[i].player_type;
+            
+            // nuevo parrafo para posicion en el campo de juego
+            let player_type = document.createElement("p");
+            player_type.textContent = players[i].player_type;
 
-                // Create a new paragraph for matches played
-                let player_match_played = document.createElement("p");
-                player_match_played.textContent = "Partidos jugados: " + players[i].player_match_played;
+            // cantidad de partidos jugados
+            let player_match_played = document.createElement("p");
+            player_match_played.textContent = "Partidos jugados: " + players[i].player_match_played;
 
-                // Create a new paragraph for goals
-                let player_goals = document.createElement("p");
-                player_goals.textContent = "Goles convertidos: " + players[i].player_goals;
+            // cantidad de goles marcados
+            let player_goals = document.createElement("p");
+            player_goals.textContent = "Goles convertidos: " + players[i].player_goals;
 
-                // Append the text nodes and new paragraphs to the original paragraph (p)
-                p.appendChild(player_image)
-                p.appendChild(player_number);
-                p.appendChild(player_name);
-                p.appendChild(player_age);
-                p.appendChild(player_type);
-                p.appendChild(player_match_played);
-                p.appendChild(player_goals);
+            // Agregar los nodos de texto y nuevos párrafos al párrafo original (p
+            
+            p.appendChild(player_number);
+            p.appendChild(player_name);
+            p.appendChild(player_age);
+            p.appendChild(player_type);
+            p.appendChild(player_match_played);
+            p.appendChild(player_goals);
 
-                // Append the complete paragraph to the player container
-                player.appendChild(p);
+            // Agregar el párrafo completo al contenedor del jugador
+            player.appendChild(p);
             }
+
                 
             
         });

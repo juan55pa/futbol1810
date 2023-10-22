@@ -38,119 +38,123 @@
         <!-- ---------------------------------------------------- -->    
     
     
-</head>
-<body>
-    
-    <div class="container">
+    </head>
+    <body>
         
-        <div class="teams">
-           
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
-            <div class="team"></div>
+        <div class="container">
             
-            
-            
-        </div>
-        <div class="container-player">
-            <div class="players">
-            <img src="" alt="">    
+            <div class="teams">            
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>
+                <div class="team"></div>     
+                
+                
             </div>
-            
+            <div class="players">
+                <!-- aca van a cargarse los jugadores -->
+            </div>
+            <div class="container-player">
+                <div class="players">
+                    
+              
+                </div>
+                
+            </div>
         </div>
-    </div>
-    <script>
-        let team=document.querySelectorAll(".team");
-        let player=document.querySelector(".players");
-        let teamId=[958,959,960,961,962,966,967,918,963,969,976,971,985,972,973,974];
-
-        let key="5e8bdecc7ae2fc73ffaeb2f4a11ea1107e7d1371d38663f26f71a0b58e73d921";
-                
-
-        function players(teamId,getPlayers){
-        fetch(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${teamId}&APIkey=${key}`)
+        <script>
+            let team=document.querySelectorAll(".team");
+            let player=document.querySelector(".players");
+            let teamId=[958,959,960,961,962,966,967,918,963,969,976,971,985,972,973,974];
+            
+    
+            let key="5e8bdecc7ae2fc73ffaeb2f4a11ea1107e7d1371d38663f26f71a0b58e73d921";
+            
+    
+            function players(teamId,getPlayers){
+            fetch(`https://apiv2.allsportsapi.com/football/?&met=Teams&teamId=${teamId}&APIkey=${key}`)
+                       
+                .then((response)=> response.json())
+                .then((equipo)=>{                
+                    getPlayers(equipo.result[0].team_name,equipo.result[0].players);
+                    getTeamLogo(equipo.result[0].team_name,equipo.result[0].teamLogo)
+    
+                });   
+            }
+    
+            for (let i = 0; i < teamId.length; i++) {
+                players(teamId[i], (team_name, players) => {
+                team[i].innerHTML = team_name;
+                team[i].addEventListener("click", () => {
+                player.innerHTML = "";
+                for (let i = 0; i < players.length; i++) {             
+                    
                    
-            .then((response)=> response.json())
-            .then((equipo)=>{
-                //debugger;
-                getPlayers(equipo.result[0].team_name,equipo.result[0].players);
-
-            });   
-        }
-
-        for (let i = 0; i < teamId.length; i++) {
-        players(teamId[i], (team_name, players) => {
-        team[i].innerHTML = team_name;
-        team[i].addEventListener("click", () => {
-            player.innerHTML = "";
-            for (let i = 0; i < players.length; i++) {
-                let player_image = document.createElement("img");                
-                player_image.src = players[i].player_image;
-                
                 let p = document.createElement("p");
-                let player_number = document.createTextNode(players[i].player_number + " - ");
-                let player_name = document.createTextNode(players[i].player_name + " (");
-                let player_age = document.createTextNode(players[i].player_age + " años)");
-
-                // Create a new paragraph for the player type
+                let player_number = document.createTextNode(players[i].player_number +[i+1] +" - ");
+                let player_name = document.createTextNode(players[i].player_name + " (") ;
+                let player_age = document.createTextNode(Math.floor(Math.random() * 31) + 15 + " años"+")");
+    
+                
+                // nuevo parrafo para posicion en el campo de juego
                 let player_type = document.createElement("p");
                 player_type.textContent = players[i].player_type;
-
-                // Create a new paragraph for matches played
+    
+                // cantidad de partidos jugados
                 let player_match_played = document.createElement("p");
                 player_match_played.textContent = "Partidos jugados: " + players[i].player_match_played;
-
-                // Create a new paragraph for goals
+    
+                // cantidad de goles marcados
                 let player_goals = document.createElement("p");
                 player_goals.textContent = "Goles convertidos: " + players[i].player_goals;
-
-                // Append the text nodes and new paragraphs to the original paragraph (p)
-                p.appendChild(player_image)
+    
+                // Agregar los nodos de texto y nuevos párrafos al párrafo original (p
+                
                 p.appendChild(player_number);
                 p.appendChild(player_name);
                 p.appendChild(player_age);
                 p.appendChild(player_type);
                 p.appendChild(player_match_played);
                 p.appendChild(player_goals);
-
-                // Append the complete paragraph to the player container
-                player.appendChild(p);
-            }
-                
-            
-        });
-    });
-}
-
-                
-         
-    </script>
     
-</body>
-</html>
-
+                // Agregar el párrafo completo al contenedor del jugador
+                player.appendChild(p);
+                }
+    
+                    
+                
+            });
+        });
+    }
+    
+                    
+             
+        </script>
+        
+    </body>
+    </html>
+    
